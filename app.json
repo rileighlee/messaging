@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "messaging",
+    "slug": "messaging",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "androidStatusBar": { 
+    "barStyle": "dark-content", 
+    "backgroundColor": "#FFFFFF"
+}
+}
