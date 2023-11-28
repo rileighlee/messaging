@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import StatusBar from './components/StatusBar';
 import MessageList from './components/MessageList';
-import { createTextMessage, createImageMessage, createLocationMessage } from './utils/messageUtils';
+import Toolbar from './components/Toolbar';
+import {
+  createTextMessage,
+  createImageMessage,
+  createLocationMessage,
+} from './utils/messageUtils';
 
 const App = () => {
   const [messages, setMessages] = useState([
@@ -12,13 +17,31 @@ const App = () => {
     createImageMessage(require('./assets/glorietta.png')),
   ]);
 
+  const handleSend = (message) => {
+    
+    setMessages([...messages, message]);
+  };
+
   return (
-    <View style={styles.container}>
-      <StatusBar />
-      <View style={styles.content}>
-        <MessageList messages={messages} />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : null}
+      style={styles.container}
+    >
+      <View style={styles.container}>
+        <StatusBar />
+        <View style={styles.content}>
+          <MessageList messages={messages} />
+        </View>
+        {}
+        <Toolbar
+          isFocused={false}
+          onChangeFocus={() => {}}
+          onSubmit={handleSend}
+          onPressCamera={() => {}}
+          onPressLocation={() => {}}
+        />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -34,4 +57,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
